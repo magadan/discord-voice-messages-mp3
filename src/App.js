@@ -15,7 +15,7 @@ const App = () => {
 
   const  download = (blob) => {
     const time = new Date().toISOString().replace(/T/, " ").replace(/\..+/, "").replace(/ /, "_");
-    let file = new File([blob], `Record_${time}.mp3`,{type:"audio/mp3", lastModified:new Date().getTime()});
+    let file = new File([blob], `Record_${time}.mp3`,{type:"audio/wav", lastModified:new Date().getTime()});
     let upload_input = document.getElementsByClassName("file-input")[0];
     let container = new DataTransfer();
     container.items.add(file);
@@ -57,7 +57,7 @@ const App = () => {
         fileReader.onloadend = () => {
           const arrayBuffer = fileReader.result;
           audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
-            audioEncoder(audioBuffer, "MP3", () => {}, download);
+            audioEncoder(audioBuffer, "WAV", () => {}, download);
           })
         }
         fileReader.readAsArrayBuffer(blob);
